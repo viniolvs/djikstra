@@ -1,10 +1,15 @@
 #include "graph.hpp"
 #include <iostream>
+#include <string.h>
 #include <time.h>
 
 using namespace std;
 
 int main(int argc, char **argv) {
+  if (argc != 2) {
+    cout << "Usage: " << argv[0] << " <list | heap>" << endl;
+    return 1;
+  }
   int n;
   cin >> n;
   Graph graph(n);
@@ -14,14 +19,16 @@ int main(int argc, char **argv) {
   clock_t start, end;
 
   // imprime o tempo de execução
-  graph.printGraph();
+  /* graph.printGraph(); */
 
   start = clock();
-  graph.dijkstraList(0, true);
-  /* graph.dijkstraHeap(0, true); */
+  if (strcmp(argv[1], "heap") == 0)
+    graph.dijkstraHeap(0, false);
+  else
+    graph.dijkstraList(0, false);
   end = clock();
 
   double time = ((static_cast<double>(end - start) + 0.0) / CLOCKS_PER_SEC);
-  printf("Tempo de execução: %f\n", time);
+  printf("%f\n", time);
   return 0;
 }
