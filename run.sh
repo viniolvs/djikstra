@@ -17,7 +17,6 @@ for ((j=0; j < 2; j+=1))
         echo "Executando para $i vértices"
         echo -n "$i,"  >> saida_$MODO.csv
         ./bin/graph.x $MODO < $DIR/Entrada\ $i.txt >> saida_$MODO.csv
-        echo >> saida_$MODO.csv
       done
 
     for ((i = 150; i <= 1500; i*=10))
@@ -25,7 +24,6 @@ for ((j=0; j < 2; j+=1))
         echo "Executando para $i vértices"
         echo -n "$i,"  >> saida_$MODO.csv
         ./bin/graph.x $MODO < $DIR/Entrada\ $i.txt >> saida_$MODO.csv
-        echo >> saida_$MODO.csv
       done
 
     for ((i = 25; i <= 250; i*=10))
@@ -33,7 +31,6 @@ for ((j=0; j < 2; j+=1))
         echo "Executando para $i vértices"
         echo -n "$i,"  >> saida_$MODO.csv
         ./bin/graph.x $MODO < $DIR/Entrada\ $i.txt >> saida_$MODO.csv
-        echo >> saida_$MODO.csv
       done
 
     for ((i = 200; i <= 500; i+=100))
@@ -41,30 +38,25 @@ for ((j=0; j < 2; j+=1))
         echo "Executando para $i vértices"
         echo -n "$i,"  >> saida_$MODO.csv
         ./bin/graph.x $MODO < $DIR/Entrada\ $i.txt >> saida_$MODO.csv
-        echo >> saida_$MODO.csv
       done
 
     i=75
     echo "Executando para $i vértices"
     echo -n "$i,"  >> saida_$MODO.csv
     ./bin/graph.x $MODO < $DIR/Entrada\ $i.txt >> saida_$MODO.csv
-    echo >> saida_$MODO.csv
 
     i=50
     echo "Executando para $i vértices"
     echo -n "$i,"  >> saida_$MODO.csv
     ./bin/graph.x $MODO < $DIR/Entrada\ $i.txt >> saida_$MODO.csv
-    echo >> saida_$MODO.csv
 
     i=650
     echo "Executando para $i vértices"
     echo -n "$i,"  >> saida_$MODO.csv
     ./bin/graph.x $MODO < $DIR/Entrada\ $i.txt >> saida_$MODO.csv
-    echo >> saida_$MODO.csv
 
     i=800
     echo "Executando para $i vértices"
     echo -n "$i,"  >> saida_$MODO.csv
     ./bin/graph.x $MODO < $DIR/Entrada\ $i.txt >> saida_$MODO.csv
-    echo >> saida_$MODO.csv
   done
