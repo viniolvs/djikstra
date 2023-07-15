@@ -18,6 +18,7 @@ int main(int argc, char **argv) {
   graph.readAdjMatrix();
   // grava o tempo de execução
   clock_t start, end;
+  bool print = false;
 
   // imprime o tempo de execução
   /* graph.printGraph(); */
@@ -27,10 +28,10 @@ int main(int argc, char **argv) {
   // executa o algoritmo de Dijkstra para cada vértice
   if (strcmp(argv[1], "heap") == 0)
     for (int i = 0; i < n; i++)
-      graph.dijkstraHeap(i, false);
+      graph.dijkstraHeap(i, print);
   else
     for (int i = 0; i < n; i++)
-      graph.dijkstraList(i, false);
+      graph.dijkstraList(i, print);
 
   end = clock();
 
