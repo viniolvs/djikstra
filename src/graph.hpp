@@ -1,3 +1,6 @@
+#ifndef GRAPH_HPP
+#define GRAPH_HPP
+
 #include <climits>
 #include <iostream>
 #include <queue>
@@ -122,3 +125,5 @@ public:
     }
   }
 };
+
+#endif // GRAPH_HPP
