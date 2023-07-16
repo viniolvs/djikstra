@@ -62,6 +62,42 @@ public:
     }
   }
 
+  int findMinDistanceComp(const std::vector<int> &distances,
+                          const std::vector<bool> &visited, int &countComp) {
+    int minDistance = INT_MAX;
+    int minIndex = -1;
+    for (int i = 0; i < numVertices; ++i) {
+      countComp += 2;
+      if (!visited[i] && distances[i] < minDistance) {
+        minDistance = distances[i];
+        minIndex = i;
+      }
+    }
+    return minIndex;
+  }
+
+  int dijkstraListComp(int startVertex) {
+    std::vector<int> distances(numVertices, INT_MAX);
+    std::vector<bool> visited(numVertices, false);
+    int countComp = 0;
+
+    distances[startVertex] = 0;
+
+    for (int i = 0; i < numVertices - 1; ++i) {
+      int u = findMinDistanceComp(distances, visited, countComp);
+      visited[u] = true;
+
+      for (int v = 0; v < numVertices; ++v) {
+        countComp += 4;
+        if (!visited[v] && adjMatrix[u][v] != 0 && distances[u] != INT_MAX &&
+            distances[u] + adjMatrix[u][v] < distances[v]) {
+          distances[v] = distances[u] + adjMatrix[u][v];
+        }
+      }
+    }
+    return countComp;
+  }
+
   struct HeapNode {
     int vertex;
     int distance;
@@ -106,6 +142,47 @@ public:
         std::cout << "Vertex " << i << ": " << distances[i] << std::endl;
       }
     }
+  }
+
+  int dijkstraHeapComp(int startVertex) {
+    std::vector<int> distances(numVertices, INT_MAX);
+    std::vector<bool> visited(numVertices, false);
+    int countComp = 0;
+
+    distances[startVertex] = 0;
+
+    // toda vez que um elemento é adicionado no heap a função compare é
+    // executada
+    auto compare = [](const HeapNode &a, const HeapNode &b) {
+      return a.distance > b.distance;
+    };
+    std::priority_queue<HeapNode, std::vector<HeapNode>, decltype(compare)>
+        minHeap(compare);
+    minHeap.push(HeapNode(startVertex, 0));
+    countComp++;
+
+    while (!minHeap.empty()) {
+      countComp++;
+      int u = minHeap.top().vertex;
+      minHeap.pop();
+
+      countComp++;
+      if (visited[u])
+        continue;
+
+      visited[u] = true;
+
+      for (int v = 0; v < numVertices; ++v) {
+        countComp += 3;
+        if (adjMatrix[u][v] != 0 && distances[u] != INT_MAX &&
+            distances[u] + adjMatrix[u][v] < distances[v]) {
+          distances[v] = distances[u] + adjMatrix[u][v];
+          countComp++;
+          minHeap.push(HeapNode(v, distances[v]));
+        }
+      }
+    }
+    return countComp;
   }
 
   void printGraph() {
